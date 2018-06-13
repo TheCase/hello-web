@@ -1,11 +1,11 @@
 version: 0.2
 
 phases:
-  install:
+  pre_build:
     commands:
-      - git symbolic-ref HEAD --short
-      - bash -c "$(curl -fsSL https://raw.githubusercontent.com/thii/aws-codebuild-extras/master/install)"
+      - BRANCH=`git symbolic-ref HEAD --short`
+      - git branch
       - printenv
   build:
     commands:
-      - printenv
+      - echo ${BRANCH}

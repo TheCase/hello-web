@@ -14,10 +14,10 @@ phases:
       - printenv
       #      - echo Build started on `date`
       #      - echo Building the branch Docker image...          
-      - echo $CODEBUILD_GIT_BRANCH
-      - echo $CODEBUILD_SOURCE_VERSION
-      - git checkout $CODEBUILD_GIT_BRANCH 
-      - git pull
+      - echo $CB_GIT_BRANCH
+      - echo $CB_SOURCE_VERSION
+        #      - git checkout $CODEBUILD_GIT_BRANCH 
+        #      - git pull
       - SHA=`git rev-parse --short HEAD`
       - echo sha $SHA
         #      - docker build -t $IMAGE_REPO_NAME:$BRANCH .
@@ -26,8 +26,8 @@ phases:
   post_build:
     commands:
       - echo Still here?  Branch
-      - echo $CODEBUILD_SOURCE_VERSION
-      - echo $CODEBUILD_GIT_BRANCH
+      - echo $CB_SOURCE_VERSION
+      - echo $CB_GIT_BRANCH
       #      - echo Build completed on `date`
         #- echo Pushing the Docker image...
         #      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$BRANCH

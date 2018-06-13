@@ -7,12 +7,13 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - echo getting Git specfics...
+      - bash -c "$(curl -fsSL https://raw.githubusercontent.com/thii/aws-codebuild-extras/master/install)"
+      - printenv
   build:
     commands:
       #      - echo Build started on `date`
       #      - echo Building the branch Docker image...          
-      - GIT_BRANCH=`git symbolic-ref HEAD --short`
-      - echo $GIT_BRANCH
         #      - git checkout $CODEBUILD_GIT_BRANCH 
         #      - git pull
       - SHA=`git rev-parse --short HEAD`

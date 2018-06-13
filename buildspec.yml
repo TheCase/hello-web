@@ -13,14 +13,18 @@ phases:
       - /bin/bash codebuild.sh
       #      - echo Build started on `date`
       #      - echo Building the branch Docker image...          
-      - export
+      - echo $CODEBUILD_GIT_BRANCH
+      - git checkout $CODEBUILD_GIT_BRANCH 
+      - git pull
+      - SHA=`git rev-parse --short HEAD`
+      - echo sha: $SHA
         #      - docker build -t $IMAGE_REPO_NAME:$BRANCH .
         #      - docker tag $IMAGE_REPO_NAME:$BRANCH $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$BRANCH
         #      - docker tag $IMAGE_REPO_NAME:$BRANCH $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$BRANCH-$SHA
   post_build:
     commands:
-      - echo Still here?
-      - export
+      - echo Still here?  Branch
+      - echo $CODEBUILD_GIT_BRANCH
       #      - echo Build completed on `date`
         #- echo Pushing the Docker image...
         #      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$BRANCH

@@ -9,16 +9,16 @@ phases:
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
   build:
     commands:
-      - ./gitvars.sh
-      - printenv
       #      - echo Build started on `date`
       #      - echo Building the branch Docker image...          
       - echo $CB_GIT_BRANCH
-      - echo $(git branch --contains $CODEBUILD_SOURCE_VERSION)
+      - GIT_BRANCH=`git branch --contains $CODEBUILD_SOURCE_VERSION`
+      - echo $GIT_BRANCH
         #      - git checkout $CODEBUILD_GIT_BRANCH 
         #      - git pull
       - SHA=`git rev-parse --short HEAD`
       - echo sha $SHA
+      - printenv
         #      - docker build -t $IMAGE_REPO_NAME:$BRANCH .
         #      - docker tag $IMAGE_REPO_NAME:$BRANCH $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$BRANCH
         #      - docker tag $IMAGE_REPO_NAME:$BRANCH $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$BRANCH-$SHA

@@ -10,7 +10,7 @@ phases:
   build:
     commands:
       - echo Caluclating Build Parameters...
-      - /bin/bash codebuild.sh
+      - ./codebuild.sh
       #      - echo Build started on `date`
       #      - echo Building the branch Docker image...          
       - echo $CODEBUILD_GIT_BRANCH

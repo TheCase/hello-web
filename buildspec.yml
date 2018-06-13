@@ -11,7 +11,7 @@ phases:
     commands:
       #      - echo Build started on `date`
       #      - echo Building the branch Docker image...          
-      - GIT_BRANCH=`git symbolic-ref HEAD --short 2>/dev/null`
+      - GIT_BRANCH=`git symbolic-ref HEAD --short`
       - echo $GIT_BRANCH
         #      - git checkout $CODEBUILD_GIT_BRANCH 
         #      - git pull

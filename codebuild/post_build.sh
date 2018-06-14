@@ -4,11 +4,13 @@
 source codebuild/env.sh
 
 if [ "$GIT_BRANCH" == "master" ]; then
-  echo "Pusing master as latest..."
-  docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest
+  echo "Pushing master as master..."
+  docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:master
   TAG_REF=`git show-ref --tags ${GIT_TAG} | awk {'print $1'}`
   echo "# TAG_REF = $TAG_REF"
   if [ "$TAG_REF" == "$GIT_COMMIT" ]; then
+    echo "Pushing master as latest..."
+    docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest
     echo "Pushing $GIT_TAG..."
     docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$GIT_TAG
   fi 

@@ -3,7 +3,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - export BRANCH=`git symbolic-ref HEAD --short 2>/dev/null`
+      - BRANCH=`git symbolic-ref HEAD --short 2>/dev/null`
       - echo ${BRANCH}
   build:
     commands:

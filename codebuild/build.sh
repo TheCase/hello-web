@@ -5,6 +5,7 @@ source codebuild/env.sh
 
 docker build -t $IMAGE_REPO_NAME:$GIT_BRANCH .
 if [ "$GIT_BRANCH" == "master" ]; then 
+  docker tag $IMAGE_REPO_NAME:$GIT_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:master
   docker tag $IMAGE_REPO_NAME:$GIT_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest
   docker tag $IMAGE_REPO_NAME:$GIT_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$GIT_TAG
 else

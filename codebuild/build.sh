@@ -4,6 +4,9 @@
 source codebuild/env.sh
 
 docker build -t $IMAGE_REPO_NAME:$GIT_BRANCH .
-
-docker tag $IMAGE_REPO_NAME:$GIT_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$GIT_BRANCH
-docker tag $IMAGE_REPO_NAME:$GIT_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$GIT_BRANCH-$GIT_SHA
+if [ "$GIT_BRANCH" == "master" ]; then 
+  docker tag $IMAGE_REPO_NAME:$GIT_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest
+else
+  docker tag $IMAGE_REPO_NAME:$GIT_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$GIT_BRANCH
+  docker tag $IMAGE_REPO_NAME:$GIT_BRANCH $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$GIT_BRANCH-$GIT_SHA
+fi

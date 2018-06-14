@@ -23,6 +23,8 @@ fi
 export PROJECT=${BUILD_ID%:$LOG_PATH}
 export BUILD_URL=https://$AWS_DEFAULT_REGION.console.aws.amazon.com/codebuild/home?region=$AWS_DEFAULT_REGION#/builds/$BUILD_ID/view/new
 
+export GIT_SHA=`git rev-parse --short HEAD`
+
 echo "==> AWS CodeBuild Extra Environment Variables:"
 echo "==> CI = $CI"
 echo "==> CB = $CB"
@@ -30,6 +32,7 @@ echo "==> GIT_AUTHOR = $GIT_AUTHOR"
 echo "==> GIT_AUTHOR_EMAIL = $GIT_AUTHOR_EMAIL"
 echo "==> GIT_BRANCH = $GIT_BRANCH "
 echo "==> GIT_COMMIT = $GIT_COMMIT"
+echo "==> GIT_SHA = $GIT_SHA"
 echo "==> GIT_MESSAGE = $GIT_MESSAGE"
 echo "==> GIT_TAG = $GIT_TAG"
 echo "==> PROJECT = $PROJECT"

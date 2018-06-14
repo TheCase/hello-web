@@ -4,8 +4,8 @@ phases:
   pre_build:
     commands:
       - echo $CODEBUILD_SOURCE_VERSION
-      - echo $build_version
       - git branch
+      - git branch --contains $CODEBUILD_SOURCE_VERSION
       - git --version
       - git --help
   build:

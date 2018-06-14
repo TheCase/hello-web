@@ -5,24 +5,14 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-      - echo getting Git specifics...
-      - bash -c "$(curl -fsSL https://raw.githubusercontent.com/thii/aws-codebuild-extras/master/install)"
-      - printenv
   build:
     commands:
-      #      - echo Build started on `date`
-      #      - echo Building the branch Docker image...          
-        #      - git checkout $CODEBUILD_GIT_BRANCH 
-        #      - git pull
-      - SHA=`git rev-parse --short HEAD`
-      - echo sha $SHA
-      - printenv
-        #      - docker build -t $IMAGE_REPO_NAME:$BRANCH .
-        #      - docker tag $IMAGE_REPO_NAME:$BRANCH $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$BRANCH
-        #      - docker tag $IMAGE_REPO_NAME:$BRANCH $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$BRANCH-$SHA
-        #  post_build:
-        #    commands:
-      #      - echo Build completed on `date`
-        #- echo Pushing the Docker image...
-        #      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$BRANCH
-        #      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$BRANCH-$SHA
+      - echo Build started on `date`
+      - echo Building the branch Docker image...          
+      - codebuild/build.sh
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$BRANCH
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$BRANCH-$SHA

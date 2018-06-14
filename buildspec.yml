@@ -5,6 +5,8 @@ phases:
     commands:
       - echo $CODEBUILD_SOURCE_VERSION
       - git branch
+      - git --version
+      - git --help
   build:
     commands:
       - echo ${BRANCH}

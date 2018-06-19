@@ -1,17 +1,12 @@
 version: 0.2
 
-env:
-  variables:
-    IMAGE_CACHE_ROOT: /root/.docker-cache 
-
 phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-      - echo Loading the Docker cache...
-      - codebuild/docker-cache-load.sh
-
+      - source codebuild/env.sh
+      - printenv
   build:
     commands:
       - echo Build started on `date`
@@ -22,7 +17,3 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - codebuild/post_build.sh
-
-cache:
-  paths:
-    - /root/.docker-cache/*

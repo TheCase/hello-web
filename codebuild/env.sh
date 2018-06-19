@@ -38,4 +38,4 @@ echo "==> GIT_TAG = $GIT_TAG"
 echo "==> PROJECT = $PROJECT"
 echo "==> PULL_REQUEST = $PULL_REQUEST"
 
-printenv
+#printenv

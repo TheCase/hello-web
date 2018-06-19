@@ -5,6 +5,8 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - echo Pull _build-cache docker image...
+      - codebuild/pull-cache.sh
   build:
     commands:
       - echo Build started on `date`

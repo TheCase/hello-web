@@ -3,6 +3,9 @@
 # held in the environment even thoughthe 0.2 buildspec says they should
 source codebuild/env.sh
 
+echo "Pushing _build-cache..."
+docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:_build-cache
+
 if [ "$GIT_BRANCH" == "master" ]; then
   echo "Pushing master as master..."
   docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:master
